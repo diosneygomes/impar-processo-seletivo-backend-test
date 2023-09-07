@@ -11,7 +11,10 @@ internal class Program
 
         builder.Services.AddControllers();
 
-        builder.Services.AddDbContext<MessagesDbContext>(options => options.UseSqlServer("Server=localhost;Database=impar-evaluation-db;User=sa;Password=123@mudar;TrustServerCertificate=True"));
+        builder.Services.AddDbContext<MessagesDbContext>(options =>
+        {
+            options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
+        });
 
         var app = builder.Build();
 
