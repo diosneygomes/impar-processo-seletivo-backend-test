@@ -12,10 +12,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Repositories\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\Impar.BackEnd.Evaluation.Core\Impar.BackEnd.Evaluation.Core.csproj" />
   </ItemGroup>
 
