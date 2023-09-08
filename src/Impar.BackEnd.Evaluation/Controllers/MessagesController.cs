@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Impar.BackEnd.Evaluation.Application.InputModel;
+using Impar.BackEnd.Evaluation.Application.Interfaces;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Impar.BackEnd.Evaluation.Controllers
 {
@@ -6,6 +8,13 @@ namespace Impar.BackEnd.Evaluation.Controllers
     [ApiController]
     public class MessagesController : ControllerBase
     {
+        private readonly IMessageApplication _messageApplication;
+
+        public MessagesController(IMessageApplication messageApplication)
+        {
+                this._messageApplication = messageApplication;
+        }
+
         [HttpGet]
         [Route("status")]
         public IActionResult Status()
@@ -16,8 +25,14 @@ namespace Impar.BackEnd.Evaluation.Controllers
 
         [HttpPost]
         [Route("send")]
-        public IActionResult SendMessages()
+        public async Task<IActionResult> SendMessages()
         {
+            var message = new MessageInputModel{ MessageContent = "Esta é uma mensagem enviada para" };
+
+            await this._messageApplication
+                .SendMessageToAllAsync(message.MessageContent)
+                .ConfigureAwait(true);
+
             return Ok();
         }
     }

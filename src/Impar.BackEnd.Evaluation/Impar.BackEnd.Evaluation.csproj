@@ -6,4 +6,10 @@
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Impar.BackEnd.Evaluation.Application\Impar.BackEnd.Evaluation.Application.csproj" />
+    <ProjectReference Include="..\Impar.BackEnd.Evaluation.Data\Impar.BackEnd.Evaluation.Data.csproj" />
+    <ProjectReference Include="..\Impar.BackEnd.Evaluation.Service\Impar.BackEnd.Evaluation.Service.csproj" />
+  </ItemGroup>
+
 </Project>

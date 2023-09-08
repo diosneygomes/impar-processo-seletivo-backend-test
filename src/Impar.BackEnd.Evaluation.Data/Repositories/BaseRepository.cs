@@ -14,11 +14,5 @@ namespace Impar.BackEnd.Evaluation.Data.Repositories
             this.myDbContext = context;
             this.dbset = context.Set<Entity>();
         }
-
-        public async Task<IEnumerable<Entity>> GetAllAsync()
-        {
-            return await dbset.ToListAsync()
-                .ConfigureAwait(false);
-        }
     }
 }

@@ -2,8 +2,8 @@
 
 namespace Impar.BackEnd.Evaluation.Core.Interfaces.Repositories
 {
-    public interface IUserRepository : IBaseRepository<User>
+    public interface IMessageRepository : IBaseRepository<Message>
     {
-        Task<IEnumerable<User>> GetAllAsync();
+        Task AddRangeAsync(IEnumerable<Message> entities);
     }
 }

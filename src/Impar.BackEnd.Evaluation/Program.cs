@@ -1,5 +1,8 @@
-using Impar.BackEnd.Evaluation;
+using Impar.BackEnd.Evaluation.Data.Context;
 using Microsoft.EntityFrameworkCore;
+using Impar.BackEnd.Evaluation.Application.Bootstrap;
+using Impar.BackEnd.Evaluation.Data.Bootstrap;
+using Impar.BackEnd.Evaluation.Service.Bootstrap;
 
 internal class Program
 {
@@ -15,6 +18,10 @@ internal class Program
         {
             options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
         });
+
+        builder.Services.ResolveDataDependenciesInjection();
+        builder.Services.ResolveServiceDependenciesInjection();
+        builder.Services.ResolveApplicationDependenciesInjection();
 
         var app = builder.Build();
 

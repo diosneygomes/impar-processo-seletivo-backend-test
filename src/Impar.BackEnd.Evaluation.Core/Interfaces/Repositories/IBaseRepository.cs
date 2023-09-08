@@ -2,6 +2,5 @@
 {
     public interface IBaseRepository<Entity> where Entity : class
     {
-        Task<IEnumerable<Entity>> GetAllAsync();
     }
 }
