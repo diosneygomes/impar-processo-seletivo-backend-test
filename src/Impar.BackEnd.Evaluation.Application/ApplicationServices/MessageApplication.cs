@@ -13,10 +13,10 @@ namespace Impar.BackEnd.Evaluation.Application.ApplicationServices
                 this._messageService = messageService;
         }
 
-        public async Task SendMessageToAllAsync(string messageContent)
+        public async Task SendMessageToAllAsync()
         {
             await this._messageService
-                .SendMessageToAllAsync(messageContent)
+                .SendMessageToAllAsync()
                 .ConfigureAwait(false);
         }
     }

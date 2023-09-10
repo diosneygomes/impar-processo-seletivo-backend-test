@@ -4,6 +4,6 @@ namespace Impar.BackEnd.Evaluation.Application.Interfaces
 {
     public interface IMessageApplication
     {
-        Task SendMessageToAllAsync(string message);
+        Task SendMessageToAllAsync();
     }
 }

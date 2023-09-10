@@ -27,13 +27,11 @@ namespace Impar.BackEnd.Evaluation.Controllers
         [Route("send")]
         public async Task<IActionResult> SendMessages()
         {
-            var message = new MessageInputModel{ MessageContent = "Esta é uma mensagem enviada para" };
-
             await this._messageApplication
-                .SendMessageToAllAsync(message.MessageContent)
+                .SendMessageToAllAsync()
                 .ConfigureAwait(true);
 
-            return Ok();
+            return this.Accepted();
         }
     }
 }
