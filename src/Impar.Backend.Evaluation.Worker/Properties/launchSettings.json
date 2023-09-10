@@ -1,0 +1,11 @@
+﻿{
+  "profiles": {
+    "Impar.Backend.Evaluation.Worker": {
+      "commandName": "Project",
+      "dotnetRunMessages": true,
+      "environmentVariables": {
+        "DOTNET_ENVIRONMENT": "Development"
+      }
+    }
+  }
+}

@@ -8,10 +8,10 @@ using System.Text.Json;
 
 namespace Impar.Backend.Evaluation.Messager
 {
-    internal class RabbitMQService : IRabbitMQService
+    public class RabbitMQService : IRabbitMQService
     {
 
-        public void SendMessageToQueue(Message message)
+        public async Task SendMessageToQueueAsync(Message message)
         {
             var factory = new ConnectionFactory() { HostName = "localhost" };
 
@@ -21,29 +21,33 @@ namespace Impar.Backend.Evaluation.Messager
             using var channel = connection
                 .CreateModel();
 
-            channel
-                .QueueDeclare(
-                    queue: "orderQueue",
-                    durable: false,
-                    exclusive: false,
-                    autoDelete: false,
-                    arguments: null);
+            await Task.Run(() => {
 
-            string messageSerializer = JsonSerializer
-                .Serialize(message);
+                channel
+                    .QueueDeclare(
+                        queue: "orderQueue",
+                        durable: false,
+                        exclusive: false,
+                        autoDelete: false,
+                        arguments: null);
 
-            var messageBytes = Encoding.UTF8
-                .GetBytes(messageSerializer);
+                string messageSerializer = JsonSerializer
+                    .Serialize(message);
 
-            channel
-                .BasicPublish(
-                    exchange: "",
-                    routingKey: "orderQueue",
-                    basicProperties: null,
-                    body: messageBytes);
+                var messageBytes = Encoding.UTF8
+                    .GetBytes(messageSerializer);
+
+                channel
+                    .BasicPublish(
+                        exchange: "",
+                        routingKey: "orderQueue",
+                        basicProperties: null,
+                        body: messageBytes);
+            })
+            .ConfigureAwait(false);
         }
 
-        public Message ReceiveMessageToQueue()
+        public async Task ReceiveMessageToQueueAsync<Message>(Action<Message> onMessage)
         {
             var factory = new ConnectionFactory { HostName = "localhost" };
 
@@ -61,11 +65,9 @@ namespace Impar.Backend.Evaluation.Messager
                     autoDelete: false,
                     arguments: null);
 
-            var consumer = new EventingBasicConsumer(channel);
+            var consumer = new AsyncEventingBasicConsumer(channel);
 
-            var messageDeserialize = new Message();
-
-            consumer.Received += (model, ea) =>
+            consumer.Received += async (model, ea) =>
             {
                 try
                 {
@@ -75,9 +77,11 @@ namespace Impar.Backend.Evaluation.Messager
                     var message = Encoding.UTF8
                         .GetString(body);
 
-                    messageDeserialize = JsonSerializer
+                    var messageDeserialize = JsonSerializer
                         .Deserialize<Message>(message);
 
+                    onMessage(messageDeserialize);
+                    
                     channel
                         .BasicAck(
                             ea.DeliveryTag,
@@ -101,7 +105,7 @@ namespace Impar.Backend.Evaluation.Messager
                     autoAck: false,
                     consumer: consumer);
 
-            return messageDeserialize;
+            await Task.Yield();
         }
     }
 }

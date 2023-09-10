@@ -1,23 +1,24 @@
 ﻿using Impar.BackEnd.Evaluation.Core.Interfaces.Repositories;
 using Impar.BackEnd.Evaluation.Core.Interfaces.Services;
 using Impar.Backend.Evaluation.Messager.Interfaces;
+using Impar.BackEnd.Evaluation.Core.Entities;
 
 namespace Impar.BackEnd.Evaluation.Service.Servicies
 {
-    internal class MessageService : IMessageService
+    public class MessageService : IMessageService
     {
         private readonly IMessageRepository _messageService;
         private readonly IUserService _userService;
-        private readonly IRabbitMQService _queue;
+        private readonly IRabbitMQService _rabbitMQService;
 
         public MessageService(
             IMessageRepository messageService,
             IUserService userService,
-            IRabbitMQService queue)
+            IRabbitMQService rabbitMQService)
         {
             this._messageService = messageService;
             this._userService = userService;
-            this._queue = queue;
+            this._rabbitMQService = rabbitMQService;
         }
 
         public async Task SendMessageToAllAsync()
@@ -26,10 +27,35 @@ namespace Impar.BackEnd.Evaluation.Service.Servicies
                 .GetAllAsync()
                 .ConfigureAwait(false);
 
-            foreach (var user in users) 
-            { 
-                
-            }
+            //foreach (var user in users) 
+            //{
+            //    var message = new Message(
+            //        $"User: {user.Name}",
+            //        $"Esta é uma mensagem enviada para {user.Name} ({user.Email})",
+            //        user.Id);
+
+            //    await this._rabbitMQService
+            //        .SendMessageToQueueAsync(message)
+            //        .ConfigureAwait(false);
+            //}
+
+            var message = new Message(
+                $"User: Diósney",
+                $"Esta é uma mensagem enviada para Diósney (diosneyf.gomes@gmail.com)",
+                1);
+
+            await this._rabbitMQService
+                .SendMessageToQueueAsync(message)
+                .ConfigureAwait(false);
+        }
+
+        public async Task ReceiveMessageAsync()
+        {
+            await this._rabbitMQService
+                .ReceiveMessageToQueueAsync<Message>(x =>
+            {
+                // TODO
+            });
         }
     }
 }

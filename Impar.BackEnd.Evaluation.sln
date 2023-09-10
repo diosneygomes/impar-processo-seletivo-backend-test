@@ -23,6 +23,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Impar.BackEnd.Evaluation.Da
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Impar.Backend.Evaluation.Messager", "src\Impar.Backend.Evaluation.Messager\Impar.Backend.Evaluation.Messager.csproj", "{99DF169B-6AE6-4789-BB90-5AAC2E133914}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Impar.Backend.Evaluation.Worker", "src\Impar.Backend.Evaluation.Worker\Impar.Backend.Evaluation.Worker.csproj", "{C74B0411-8318-47C4-99FD-2B352D95CCF9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -53,6 +55,10 @@ Global
 		{99DF169B-6AE6-4789-BB90-5AAC2E133914}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{99DF169B-6AE6-4789-BB90-5AAC2E133914}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{99DF169B-6AE6-4789-BB90-5AAC2E133914}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C74B0411-8318-47C4-99FD-2B352D95CCF9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C74B0411-8318-47C4-99FD-2B352D95CCF9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C74B0411-8318-47C4-99FD-2B352D95CCF9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C74B0411-8318-47C4-99FD-2B352D95CCF9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -64,6 +70,7 @@ Global
 		{2F725E7D-205C-4D05-AE08-0EDA804D09CF} = {CFA85606-4A89-4E69-A8DA-CDF0E2F43850}
 		{3CA14F8A-BA31-4AC1-950C-C3B991394D31} = {305400E0-BB61-4324-B5D8-E2DD25EB27B7}
 		{99DF169B-6AE6-4789-BB90-5AAC2E133914} = {305400E0-BB61-4324-B5D8-E2DD25EB27B7}
+		{C74B0411-8318-47C4-99FD-2B352D95CCF9} = {83EFAC00-47F2-49AF-80D2-022BA06FF419}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {6184BDF5-6D54-4D21-B80A-7B3C141E6C79}

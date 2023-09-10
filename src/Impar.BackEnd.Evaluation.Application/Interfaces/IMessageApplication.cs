@@ -1,9 +1,9 @@
-﻿using Impar.BackEnd.Evaluation.Application.InputModel;
-
-namespace Impar.BackEnd.Evaluation.Application.Interfaces
+﻿namespace Impar.BackEnd.Evaluation.Application.Interfaces
 {
     public interface IMessageApplication
     {
         Task SendMessageToAllAsync();
+
+        Task ReceiveMessageAsync();
     }
 }

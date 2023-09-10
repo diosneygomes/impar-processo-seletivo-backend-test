@@ -4,8 +4,8 @@ namespace Impar.Backend.Evaluation.Messager.Interfaces
 {
     public interface IRabbitMQService
     {
-        void SendMessageToQueue(Message message);
+        Task SendMessageToQueueAsync(Message message);
 
-        Message ReceiveMessageToQueue();
+        Task ReceiveMessageToQueueAsync<Message>(Action<Message> onMessage);
     }
 }

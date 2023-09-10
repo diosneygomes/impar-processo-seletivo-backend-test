@@ -5,7 +5,7 @@ using Impar.BackEnd.Evaluation.Core.Interfaces.Services;
 
 namespace Impar.BackEnd.Evaluation.Service.Servicies
 {
-    internal class UserService : IUserService
+    public class UserService : IUserService
     {
         private readonly IUserRepository _userRepository;
 

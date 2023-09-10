@@ -4,7 +4,7 @@ using Impar.BackEnd.Evaluation.Data.Context;
 
 namespace Impar.BackEnd.Evaluation.Data.Repositories
 {
-    internal class MessageRepository : BaseRepository<Message>, IMessageRepository
+    public class MessageRepository : BaseRepository<Message>, IMessageRepository
     {
         public MessageRepository(MessagesDbContext context) : base(context)
         {

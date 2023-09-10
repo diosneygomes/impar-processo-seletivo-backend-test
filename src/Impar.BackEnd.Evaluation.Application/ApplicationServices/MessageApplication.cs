@@ -19,5 +19,12 @@ namespace Impar.BackEnd.Evaluation.Application.ApplicationServices
                 .SendMessageToAllAsync()
                 .ConfigureAwait(false);
         }
+
+        public async Task ReceiveMessageAsync()
+        {
+            await this._messageService
+                .ReceiveMessageAsync()
+                .ConfigureAwait(false);
+        }
     }
 }

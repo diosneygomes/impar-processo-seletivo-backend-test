@@ -3,5 +3,8 @@
     public interface IMessageService
     {
         Task SendMessageToAllAsync();
+
+        Task ReceiveMessageAsync();
+
     }
 }

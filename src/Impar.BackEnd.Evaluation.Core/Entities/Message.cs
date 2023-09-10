@@ -2,15 +2,26 @@
 {
     public class Message
     {
-        public int Id { get; set; }
+        public Message(
+            string subject,
+            string messageContent,
+            int userId)
+        {
+            this.Subject = subject;
+            this.MessageContent = messageContent;
+            this.UserId = userId;
+            this.SentAt = DateTime.UtcNow;
+        }
 
-        public string Subject { get; set; }
+        public int Id { get; private set; }
 
-        public string MessageContent { get; set; }
+        public string Subject { get; private set; }
 
-        public DateTime SentAt { get; set; }
+        public string MessageContent { get; private set; }
 
-        public int UserId { get; set; }
+        public DateTime SentAt { get; private set; }
+
+        public int UserId { get; private set; }
 
         public User User { get; set; }
     }

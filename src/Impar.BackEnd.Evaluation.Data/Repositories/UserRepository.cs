@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Impar.BackEnd.Evaluation.Data.Repositories
 {
-    internal class UserRepository : BaseRepository<User>, IUserRepository
+    public class UserRepository : BaseRepository<User>, IUserRepository
     {
         public UserRepository(MessagesDbContext context) : base(context)
         {

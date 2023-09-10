@@ -4,6 +4,7 @@ using Impar.BackEnd.Evaluation.Application.Bootstrap;
 using Impar.BackEnd.Evaluation.Data.Bootstrap;
 using Impar.BackEnd.Evaluation.Service.Bootstrap;
 using Impar.Backend.Evaluation.Messager.Bootstrap;
+using Impar.Backend.Evaluation.Worker;
 
 internal class Program
 {
@@ -24,6 +25,8 @@ internal class Program
         builder.Services.ResolveServiceDependenciesInjection();
         builder.Services.ResolveApplicationDependenciesInjection();
         builder.Services.ResolveMessagerDependenciesInjection();
+
+        //builder.Services.AddHostedService<Worker>();
 
 
         var app = builder.Build();
