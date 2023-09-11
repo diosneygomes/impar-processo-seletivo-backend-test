@@ -10,6 +10,6 @@
 
         public string Phone { get; set; }
 
-        public virtual IEnumerable<Message> Messages { get; set; }
+        //public virtual IEnumerable<Message> Messages { get; set; }
     }
 }
