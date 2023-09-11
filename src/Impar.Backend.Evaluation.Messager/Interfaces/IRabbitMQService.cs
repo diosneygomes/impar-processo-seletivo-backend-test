@@ -7,5 +7,8 @@ namespace Impar.Backend.Evaluation.Messager.Interfaces
         Task SendMessageToQueueAsync(Message message);
 
         Task ReceiveMessageToQueueAsync<Message>(Action<Message> onMessage);
+
+        void ReceiveMessageToQueue();
+
     }
 }

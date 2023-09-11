@@ -10,7 +10,6 @@ namespace Impar.Backend.Evaluation.Messager
 {
     public class RabbitMQService : IRabbitMQService
     {
-
         public async Task SendMessageToQueueAsync(Message message)
         {
             var factory = new ConnectionFactory() { HostName = "localhost" };
@@ -106,6 +105,65 @@ namespace Impar.Backend.Evaluation.Messager
                     consumer: consumer);
 
             await Task.Yield();
+        }
+
+        public void ReceiveMessageToQueue()
+        {
+            var factory = new ConnectionFactory { HostName = "localhost" };
+
+            var connection = factory
+                .CreateConnection();
+
+            var channel = connection
+                .CreateModel();
+
+            channel
+                .QueueDeclare(
+                    queue: "orderQueue",
+                    durable: false,
+                    exclusive: false,
+                    autoDelete: false,
+                    arguments: null);
+
+            var consumer = new EventingBasicConsumer(channel);
+
+            consumer.Received += (model, ea) =>
+            {
+                try
+                {
+                    var body = ea.Body
+                        .ToArray();
+
+                    var message = Encoding.UTF8
+                        .GetString(body);
+
+                    var messageDeserialize = JsonSerializer
+                        .Deserialize<Message>(message);
+
+                    Console.WriteLine($"Olá eu sou a mensagem esperada!!! {messageDeserialize.MessageContent}");
+
+                    channel
+                        .BasicAck(
+                            ea.DeliveryTag,
+                            false);
+                }
+                catch (RabbitMQErrorServerException e)
+                {
+                    channel
+                        .BasicNack(
+                            ea.DeliveryTag,
+                            false,
+                            true);
+
+                    throw new RabbitMQErrorServerException($"Erro ao receber mensagem - {e.Message}");
+                }
+            };
+
+            channel
+                .BasicConsume(
+                    queue: "orderQueue",
+                    autoAck: false,
+                    consumer: consumer);
         }
     }
 }

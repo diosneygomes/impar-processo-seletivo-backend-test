@@ -26,7 +26,7 @@ internal class Program
         builder.Services.ResolveApplicationDependenciesInjection();
         builder.Services.ResolveMessagerDependenciesInjection();
 
-        //builder.Services.AddHostedService<Worker>();
+        builder.Services.AddHostedService<Worker>();
 
 
         var app = builder.Build();
