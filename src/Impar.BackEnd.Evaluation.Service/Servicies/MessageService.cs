@@ -51,13 +51,11 @@ namespace Impar.BackEnd.Evaluation.Service.Servicies
 
         public async Task ReceiveMessageAsync()
         {
-            //await this._rabbitMQService
-            //    .ReceiveMessageToQueueAsync<Message>(x =>
-            //{
-            //    // TODO
-            //});
-
-            this._rabbitMQService.ReceiveMessageToQueue();
+            await this._rabbitMQService
+                .ReceiveMessageToQueueAsync(x =>
+            {
+                // TODO
+            });
         }
     }
 }

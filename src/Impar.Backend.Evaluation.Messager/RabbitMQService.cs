@@ -46,14 +46,14 @@ namespace Impar.Backend.Evaluation.Messager
             .ConfigureAwait(false);
         }
 
-        public async Task ReceiveMessageToQueueAsync<Message>(Action<Message> onMessage)
+        public async Task ReceiveMessageToQueueAsync(Action<Message> onMessage)
         {
             var factory = new ConnectionFactory { HostName = "localhost" };
 
-            using var connection = factory
+            var connection = factory
                 .CreateConnection();
             
-            using var channel = connection
+            var channel = connection
                 .CreateModel();
 
             channel
@@ -64,7 +64,7 @@ namespace Impar.Backend.Evaluation.Messager
                     autoDelete: false,
                     arguments: null);
 
-            var consumer = new AsyncEventingBasicConsumer(channel);
+            var consumer = new EventingBasicConsumer(channel);
 
             consumer.Received += async (model, ea) =>
             {
@@ -80,7 +80,7 @@ namespace Impar.Backend.Evaluation.Messager
                         .Deserialize<Message>(message);
 
                     onMessage(messageDeserialize);
-                    
+
                     channel
                         .BasicAck(
                             ea.DeliveryTag,
