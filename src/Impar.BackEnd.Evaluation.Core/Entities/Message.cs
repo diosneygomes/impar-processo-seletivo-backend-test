@@ -23,6 +23,6 @@
 
         public int UserId { get; private set; }
 
-        public User User { get; set; }
+        //public virtual User User { get; set; }
     }
 }

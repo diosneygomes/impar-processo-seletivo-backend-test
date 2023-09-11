@@ -10,10 +10,10 @@ namespace Impar.BackEnd.Evaluation.Data.Repositories
         {
         }
 
-        public async Task AddRangeAsync(IEnumerable<Message> entities)
+        public async Task AddAsync(Message message)
         {
             await this.dbset
-                .AddRangeAsync(entities)
+                .AddAsync(message)
                 .ConfigureAwait(false);
 
             await this.myDbContext
