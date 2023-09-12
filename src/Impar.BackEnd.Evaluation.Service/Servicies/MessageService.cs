@@ -47,6 +47,8 @@ namespace Impar.BackEnd.Evaluation.Service.Servicies
             {
                 if (message is not null)
                 {
+                    Thread.Sleep(1000);
+
                     await this._messageRepository
                         .AddAsync(message)
                         .ConfigureAwait(false);
