@@ -2,10 +2,11 @@
 using Impar.BackEnd.Evaluation.Core.Interfaces.Services;
 using Impar.Backend.Evaluation.Messager.Interfaces;
 using Impar.BackEnd.Evaluation.Core.Entities;
+using Impar.BackEnd.Evaluation.Service.Exceptions;
 
 namespace Impar.BackEnd.Evaluation.Service.Servicies
 {
-    public class MessageService : IMessageService
+    internal class MessageService : IMessageService
     {
         private readonly IMessageRepository _messageRepository;
         private readonly IUserService _userService;
@@ -46,22 +47,23 @@ namespace Impar.BackEnd.Evaluation.Service.Servicies
             await this._rabbitMQService
                 .ReceiveMessageToQueueAsync(async message =>
             {
-                if (message.MessageContent is not null)
-                {
-                    await _semaphore
-                        .WaitAsync()
-                        .ConfigureAwait(false);
+                await _semaphore
+                    .WaitAsync()
+                    .ConfigureAwait(false);
 
-                    try
-                    {
-                        await this._messageRepository
-                            .AddAsync(message)
-                            .ConfigureAwait(false);
-                    }
-                    finally
-                    {
-                        _semaphore.Release();
-                    }
+                try
+                {
+                    await this._messageRepository
+                        .AddAsync(message)
+                        .ConfigureAwait(false);
+                }
+                catch (Exception)
+                {
+                    throw new AddEntityException($"Não foi possível enviar a mensagem");
+                }
+                finally
+                {
+                    _semaphore.Release();
                 }
             });
         }

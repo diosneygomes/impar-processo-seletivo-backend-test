@@ -1,10 +1,9 @@
-﻿using Impar.BackEnd.Evaluation.Application.InputModel;
-using Impar.BackEnd.Evaluation.Application.Interfaces;
+﻿using Impar.BackEnd.Evaluation.Application.Interfaces;
 using Impar.BackEnd.Evaluation.Core.Interfaces.Services;
 
 namespace Impar.BackEnd.Evaluation.Application.ApplicationServices
 {
-    public class MessageApplication : IMessageApplication
+    internal class MessageApplication : IMessageApplication
     {
         private readonly IMessageService _messageService;
 

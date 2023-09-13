@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Impar.BackEnd.Evaluation.Data.Repositories
 {
-    public class BaseRepository<Entity> : IBaseRepository<Entity> where Entity : class
+    internal class BaseRepository<Entity> : IBaseRepository<Entity> where Entity : class
     {
         protected readonly MessagesDbContext myDbContext;
         protected readonly DbSet<Entity> dbset;

@@ -1,5 +1,4 @@
-﻿using Impar.BackEnd.Evaluation.Application.InputModel;
-using Impar.BackEnd.Evaluation.Application.Interfaces;
+﻿using Impar.BackEnd.Evaluation.Application.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Impar.BackEnd.Evaluation.Controllers
@@ -25,11 +24,20 @@ namespace Impar.BackEnd.Evaluation.Controllers
 
         [HttpPost]
         [Route("send")]
+        [ProducesResponseType(StatusCodes.Status202Accepted)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> SendMessages()
         {
-            await this._messageApplication
-                .SendMessageToAllAsync()
-                .ConfigureAwait(true);
+            try
+            {
+                await this._messageApplication
+                    .SendMessageToAllAsync()
+                    .ConfigureAwait(true);
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
 
             return this.Accepted();
         }
