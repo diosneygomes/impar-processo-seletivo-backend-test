@@ -1,15 +1,50 @@
-﻿namespace Impar.BackEnd.Evaluation.Core.Entities
+﻿using Impar.BackEnd.Evaluation.Core.Exceptions;
+
+namespace Impar.BackEnd.Evaluation.Core.Entities
 {
     public class User
     {
-        public int Id { get; set; }
+        public User(
+            int id,
+            string name,
+            string email,
+            string phone)
+        {
+            this.Id = id;
+            this.Name = name;
+            this.Email = email;
+            this.Phone = phone;
 
-        public string Name { get; set; }
+            this.Validate();
+        }
 
-        public string Email { get; set; }
 
-        public string Phone { get; set; }
+        public int Id { get; private set; }
 
-        //public virtual IEnumerable<Message> Messages { get; set; }
+        public string Name { get; private set; }
+
+        public string Email { get; private set; }
+
+        public string Phone { get; private set; }
+
+        public virtual IEnumerable<Message> Messages { get; set; }
+
+        public void Validate()
+        {
+            if (string.IsNullOrEmpty(this.Name))
+            {
+                throw new DomainException("Message without name!");
+            }
+
+            if (string.IsNullOrEmpty(this.Email))
+            {
+                throw new DomainException("Message without e-mail!");
+            }
+
+            if (string.IsNullOrEmpty(this.Phone))
+            {
+                throw new DomainException("Message without phone!");
+            }
+        }
     }
 }
