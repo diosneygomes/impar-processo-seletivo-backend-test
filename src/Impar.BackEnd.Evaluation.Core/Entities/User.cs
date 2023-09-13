@@ -33,17 +33,17 @@ namespace Impar.BackEnd.Evaluation.Core.Entities
         {
             if (string.IsNullOrEmpty(this.Name))
             {
-                throw new DomainException("Message without name!");
+                throw new DomainException("User without name!");
             }
 
             if (string.IsNullOrEmpty(this.Email))
             {
-                throw new DomainException("Message without e-mail!");
+                throw new DomainException("User without e-mail!");
             }
 
             if (string.IsNullOrEmpty(this.Phone))
             {
-                throw new DomainException("Message without phone!");
+                throw new DomainException("User without phone!");
             }
         }
     }
