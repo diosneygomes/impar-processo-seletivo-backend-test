@@ -48,7 +48,13 @@ namespace Impar.Backend.Evaluation.Messager
 
         public async Task ReceiveMessageToQueueAsync(Action<Message> onMessage)
         {
-            var factory = new ConnectionFactory { HostName = "localhost" };
+            var factory = new ConnectionFactory { 
+                HostName = "localhost",
+                Ssl =
+                {
+                    ServerName = "localhost",
+                }
+            };
 
             var connection = factory
                 .CreateConnection();

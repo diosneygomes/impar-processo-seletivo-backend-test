@@ -10,6 +10,7 @@ namespace Impar.BackEnd.Evaluation.Service.Servicies
         private readonly IMessageRepository _messageRepository;
         private readonly IUserService _userService;
         private readonly IRabbitMQService _rabbitMQService;
+        private readonly SemaphoreSlim _semaphore = new(1);
 
         public MessageService(
             IMessageRepository messageRepository,
@@ -45,13 +46,22 @@ namespace Impar.BackEnd.Evaluation.Service.Servicies
             await this._rabbitMQService
                 .ReceiveMessageToQueueAsync(async message =>
             {
-                if (message is not null)
+                if (message.MessageContent is not null)
                 {
-                    Thread.Sleep(1000);
-
-                    await this._messageRepository
-                        .AddAsync(message)
+                    await _semaphore
+                        .WaitAsync()
                         .ConfigureAwait(false);
+
+                    try
+                    {
+                        await this._messageRepository
+                            .AddAsync(message)
+                            .ConfigureAwait(false);
+                    }
+                    finally
+                    {
+                        _semaphore.Release();
+                    }
                 }
             });
         }
