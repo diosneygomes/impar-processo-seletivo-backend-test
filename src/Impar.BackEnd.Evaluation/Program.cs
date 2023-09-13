@@ -26,6 +26,7 @@ internal class Program
         builder.Services.ResolveApplicationDependenciesInjection();
         builder.Services.ResolveMessagerDependenciesInjection();
 
+        // habilita worker para funcionar simultaneamente com a API
         //builder.Services.AddHostedService<Worker>();
 
 
