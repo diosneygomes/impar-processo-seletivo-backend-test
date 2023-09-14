@@ -11,13 +11,28 @@ namespace Impar.BackEnd.Evaluation.Data.Repositories
         {
         }
 
-        public async Task<IEnumerable<User>> GetAllAsync()
+        public async Task<IEnumerable<User>> GetBatchAsync(
+            int skip,
+            int take)
         {
-            var users =  await this.dbset
+            var users = await this.dbset
+                .AsNoTracking()
+                .Skip(skip)
+                .Take(take)
                 .ToListAsync()
                 .ConfigureAwait(false);
 
             return users;
+        }
+
+        public async Task<int> GetTotalUsersAsync()
+        {
+            var total = await this.dbset
+                .AsNoTracking()
+                .CountAsync()
+                .ConfigureAwait(false);
+
+            return total;
         }
     }
 }

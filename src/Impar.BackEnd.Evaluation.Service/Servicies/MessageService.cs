@@ -25,20 +25,36 @@ namespace Impar.BackEnd.Evaluation.Service.Servicies
 
         public async Task SendMessageToAllAsync()
         {
-            var users = await this._userService
-                .GetAllAsync()
+            const int take = 1000;
+
+            var skip = 0;
+
+            var totalUsers = await this._userService
+                .GetTotalUsersAsync()
                 .ConfigureAwait(false);
 
-            foreach (var user in users)
+            while (totalUsers > 0)
             {
-                var message = new Message(
-                    $"User: {user.Name}",
-                    $"Esta é uma mensagem enviada para {user.Name} ({user.Email})",
-                    user.Id);
-
-                await this._rabbitMQService
-                    .SendMessageToQueueAsync(message)
+                var users = await this._userService
+                    .GetBatchAsync(
+                        skip,
+                        take)
                     .ConfigureAwait(false);
+
+                foreach (var user in users)
+                {
+                    var message = new Message(
+                        $"User: {user.Name}",
+                        $"Esta é uma mensagem enviada para {user.Name} ({user.Email})",
+                        user.Id);
+
+                    await this._rabbitMQService
+                        .SendMessageToQueueAsync(message)
+                        .ConfigureAwait(false);
+                }
+
+                totalUsers -= take;
+                skip += take;
             }
         }
 
@@ -59,7 +75,7 @@ namespace Impar.BackEnd.Evaluation.Service.Servicies
                 }
                 catch (Exception)
                 {
-                    throw new AddEntityException($"Não foi possível enviar a mensagem");
+                    throw new AddEntityException($"Não foi possível adicionar a mensagem");
                 }
                 finally
                 {

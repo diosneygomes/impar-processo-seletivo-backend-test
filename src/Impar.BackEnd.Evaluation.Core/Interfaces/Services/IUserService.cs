@@ -4,6 +4,10 @@ namespace Impar.BackEnd.Evaluation.Core.Interfaces.Services
 {
     public interface IUserService
     {
-        Task<IEnumerable<User>> GetAllAsync();
+        Task<IEnumerable<User>> GetBatchAsync(
+            int skip,
+            int take);
+
+        Task<int> GetTotalUsersAsync();
     }
 }
