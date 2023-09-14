@@ -1,6 +1,8 @@
-﻿using Impar.Backend.Evaluation.Messager.Exceptions;
+﻿using Impar.Backend.Evaluation.Messager.Configurations;
+using Impar.Backend.Evaluation.Messager.Exceptions;
 using Impar.Backend.Evaluation.Messager.Interfaces;
 using Impar.BackEnd.Evaluation.Core.Entities;
+using Microsoft.Extensions.Options;
 using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
 using System.Text;
@@ -10,9 +12,16 @@ namespace Impar.Backend.Evaluation.Messager
 {
     public class RabbitMQService : IRabbitMQService
     {
+        private readonly RabbitMQSetting _rabbitMQSetting;
+
+        public RabbitMQService(IOptions<RabbitMQSetting> rabbitMQSetting)
+        {
+            this._rabbitMQSetting = rabbitMQSetting.Value;
+        }
+
         public async Task SendMessageToQueueAsync(Message message)
         {
-            var factory = new ConnectionFactory() { HostName = "localhost" };
+            var factory = new ConnectionFactory() { HostName = this._rabbitMQSetting.HostName };
 
             using var connection = factory
                 .CreateConnection();
@@ -24,7 +33,7 @@ namespace Impar.Backend.Evaluation.Messager
 
                 channel
                     .QueueDeclare(
-                        queue: "orderQueue",
+                        queue: this._rabbitMQSetting.Queue,
                         durable: false,
                         exclusive: false,
                         autoDelete: false,
@@ -39,7 +48,7 @@ namespace Impar.Backend.Evaluation.Messager
                 channel
                     .BasicPublish(
                         exchange: "",
-                        routingKey: "orderQueue",
+                        routingKey: this._rabbitMQSetting.Queue,
                         basicProperties: null,
                         body: messageBytes);
             })
@@ -49,10 +58,10 @@ namespace Impar.Backend.Evaluation.Messager
         public async Task ReceiveMessageToQueueAsync(Action<Message> onMessage)
         {
             var factory = new ConnectionFactory { 
-                HostName = "localhost",
+                HostName = this._rabbitMQSetting.HostName,
                 Ssl =
                 {
-                    ServerName = "localhost",
+                    ServerName = this._rabbitMQSetting.ServerName,
                 }
             };
 
@@ -64,7 +73,7 @@ namespace Impar.Backend.Evaluation.Messager
 
             channel
                 .QueueDeclare(
-                    queue: "orderQueue",
+                    queue: this._rabbitMQSetting.Queue,
                     durable: false,
                     exclusive: false,
                     autoDelete: false,
@@ -108,7 +117,7 @@ namespace Impar.Backend.Evaluation.Messager
 
             channel
                 .BasicConsume(
-                    queue: "orderQueue",
+                    queue: this._rabbitMQSetting.Queue,
                     autoAck: false,
                     consumer: consumer);
 
