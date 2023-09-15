@@ -13,17 +13,17 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "4 - Infrastructure", "4 - I
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Impar.BackEnd.Evaluation.Application", "src\Impar.BackEnd.Evaluation.Application\Impar.BackEnd.Evaluation.Application.csproj", "{F39075AB-0B4D-41EB-81E2-C3A396490C3A}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Impar.BackEnd.Evaluation", "src\Impar.BackEnd.Evaluation\Impar.BackEnd.Evaluation.csproj", "{A4FA2C2E-8547-435D-BE27-79D1AC249BB7}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Impar.BackEnd.Evaluation.Core", "src\Impar.BackEnd.Evaluation.Core\Impar.BackEnd.Evaluation.Core.csproj", "{2323295F-271E-4E1F-BD6E-C7D5D47B3EF6}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Impar.BackEnd.Evaluation.Service", "src\Impar.BackEnd.Evaluation.Service\Impar.BackEnd.Evaluation.Service.csproj", "{2F725E7D-205C-4D05-AE08-0EDA804D09CF}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Impar.BackEnd.Evaluation.Data", "src\Impar.BackEnd.Evaluation.Data\Impar.BackEnd.Evaluation.Data.csproj", "{3CA14F8A-BA31-4AC1-950C-C3B991394D31}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Impar.Backend.Evaluation.Messager", "src\Impar.Backend.Evaluation.Messager\Impar.Backend.Evaluation.Messager.csproj", "{99DF169B-6AE6-4789-BB90-5AAC2E133914}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Impar.Backend.Evaluation.Messager", "src\Impar.Backend.Evaluation.Messager\Impar.Backend.Evaluation.Messager.csproj", "{99DF169B-6AE6-4789-BB90-5AAC2E133914}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Impar.Backend.Evaluation.Worker", "src\Impar.Backend.Evaluation.Worker\Impar.Backend.Evaluation.Worker.csproj", "{C74B0411-8318-47C4-99FD-2B352D95CCF9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Impar.Backend.Evaluation.Worker", "src\Impar.Backend.Evaluation.Worker\Impar.Backend.Evaluation.Worker.csproj", "{C74B0411-8318-47C4-99FD-2B352D95CCF9}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Impar.BackEnd.Evaluation.Api", "src\Impar.BackEnd.Evaluation.Api\Impar.BackEnd.Evaluation.Api.csproj", "{0154056E-44BB-4441-9A6D-F0E9F187B1E7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -35,10 +35,6 @@ Global
 		{F39075AB-0B4D-41EB-81E2-C3A396490C3A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F39075AB-0B4D-41EB-81E2-C3A396490C3A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F39075AB-0B4D-41EB-81E2-C3A396490C3A}.Release|Any CPU.Build.0 = Release|Any CPU
-		{A4FA2C2E-8547-435D-BE27-79D1AC249BB7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A4FA2C2E-8547-435D-BE27-79D1AC249BB7}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A4FA2C2E-8547-435D-BE27-79D1AC249BB7}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A4FA2C2E-8547-435D-BE27-79D1AC249BB7}.Release|Any CPU.Build.0 = Release|Any CPU
 		{2323295F-271E-4E1F-BD6E-C7D5D47B3EF6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{2323295F-271E-4E1F-BD6E-C7D5D47B3EF6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2323295F-271E-4E1F-BD6E-C7D5D47B3EF6}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -59,18 +55,22 @@ Global
 		{C74B0411-8318-47C4-99FD-2B352D95CCF9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C74B0411-8318-47C4-99FD-2B352D95CCF9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C74B0411-8318-47C4-99FD-2B352D95CCF9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0154056E-44BB-4441-9A6D-F0E9F187B1E7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0154056E-44BB-4441-9A6D-F0E9F187B1E7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0154056E-44BB-4441-9A6D-F0E9F187B1E7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0154056E-44BB-4441-9A6D-F0E9F187B1E7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{F39075AB-0B4D-41EB-81E2-C3A396490C3A} = {480F0D5A-48D0-46F7-AE64-4210B5F742E3}
-		{A4FA2C2E-8547-435D-BE27-79D1AC249BB7} = {83EFAC00-47F2-49AF-80D2-022BA06FF419}
 		{2323295F-271E-4E1F-BD6E-C7D5D47B3EF6} = {CFA85606-4A89-4E69-A8DA-CDF0E2F43850}
 		{2F725E7D-205C-4D05-AE08-0EDA804D09CF} = {CFA85606-4A89-4E69-A8DA-CDF0E2F43850}
 		{3CA14F8A-BA31-4AC1-950C-C3B991394D31} = {305400E0-BB61-4324-B5D8-E2DD25EB27B7}
 		{99DF169B-6AE6-4789-BB90-5AAC2E133914} = {305400E0-BB61-4324-B5D8-E2DD25EB27B7}
 		{C74B0411-8318-47C4-99FD-2B352D95CCF9} = {83EFAC00-47F2-49AF-80D2-022BA06FF419}
+		{0154056E-44BB-4441-9A6D-F0E9F187B1E7} = {83EFAC00-47F2-49AF-80D2-022BA06FF419}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {6184BDF5-6D54-4D21-B80A-7B3C141E6C79}
